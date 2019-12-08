@@ -1,38 +1,21 @@
 import interfaces.Day;
 import interfaces.IntInputs;
+import programs.IntCodeComputer;
 
 public class Day2__1202ProgramAlert implements Day, IntInputs {
 
-    int run_program(int[] in) {
-        for (int i = 0; i <= in.length; i += 4) {
+    IntCodeComputer computer = new IntCodeComputer();
 
-            int opcode = in[i];
-            if (opcode == 99)
-                return in[0];
-
-            int pos_a = in[i + 1];
-            int pos_b = in[i + 2];
-            int pos_out = in[i + 3];
-
-            if (opcode == 1)
-                in[pos_out] = in[pos_a] + in[pos_b];
-            else if (opcode == 2)
-                in[pos_out] = in[pos_a] * in[pos_b];
-
-        }
-        return -1;
-    }
-
-    private int run_program(int[] in, int noun, int verb) {
+    private int run_program_with_noun_verb(int[] in, int noun, int verb) {
         in[1] = noun;
         in[2] = verb;
-        return run_program(in);
+        return computer.run_program(-1, in);
     }
 
     public int part_one() {
         int[] input = get_int_inputs(",");
 
-        return run_program(input, 12, 2);
+        return run_program_with_noun_verb(input, 12, 2);
     }
 
     public int part_two() {
@@ -41,7 +24,7 @@ public class Day2__1202ProgramAlert implements Day, IntInputs {
         final int apollo_landing = 19690720;
         while (verb <= 99) {
 
-            if (run_program(get_int_inputs(","), noun, verb) == apollo_landing)
+            if (run_program_with_noun_verb(get_int_inputs(","), noun, verb) == apollo_landing)
                 return 100 * noun + verb;
 
             noun++;
