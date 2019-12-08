@@ -1,3 +1,4 @@
+import exception.PathNotImplementedException;
 import interfaces.Day;
 import interfaces.Reader;
 
@@ -44,7 +45,7 @@ public class Day3__CrossedWires implements Reader, Day {
         final List<Wire> wires = map_wires();
         final Set<Point> intersections = wires.get(0).getIntersections(wires.get(1));
         return intersections.stream()
-                .map(point -> wires.get(0).getSubLength(point) + wires.get(1).getSubLength(point))
+                .map(point -> wires.get(0).safeGetSubLength(point) + wires.get(1).safeGetSubLength(point))
                 .filter(i -> i > 0)
                 .min(Integer::compareTo)
                 .get();
@@ -139,14 +140,12 @@ public class Day3__CrossedWires implements Reader, Day {
             return new Point(x, y);
         }
 
-        public int getLength() {
+        public int getLength() throws PathNotImplementedException {
             if (getType() == Type.horizontal)
                 return Math.abs(start.x - end.x);
             if (getType() == Type.vertical)
                 return Math.abs(start.y - end.y);
-            System.err.println("This is yet to be implemented");
-            System.exit(0);
-            return 0;
+            throw new PathNotImplementedException();
         }
 
         public boolean has(Point point) {
@@ -156,7 +155,7 @@ public class Day3__CrossedWires implements Reader, Day {
                     && point.y <= Math.max(start.y, end.y);
         }
 
-        public int getSubLength(Point point) {
+        public int getSubLength(Point point) throws PathNotImplementedException {
             return new Line(start, point).getLength();
         }
 
@@ -219,7 +218,7 @@ public class Day3__CrossedWires implements Reader, Day {
             return lines.stream().anyMatch(l -> l.has(point));
         }
 
-        public int getSubLength(Point point) {
+        public int getSubLength(Point point) throws PathNotImplementedException {
             int length = 0;
             if (has(point)) {
                 for (int i = 0; i < lines.size(); i++) {
@@ -231,6 +230,14 @@ public class Day3__CrossedWires implements Reader, Day {
                 }
             }
             return -1;
+        }
+
+        public int safeGetSubLength(Point point) {
+            try {
+                return getSubLength(point);
+            } catch (PathNotImplementedException e) {
+                return -1;
+            }
         }
     }
 }
