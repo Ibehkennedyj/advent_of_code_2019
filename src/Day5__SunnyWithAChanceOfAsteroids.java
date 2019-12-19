@@ -4,7 +4,7 @@ import programs.IntCodeComputer;
 
 public class Day5__SunnyWithAChanceOfAsteroids implements Day, IntInputs {
 
-    IntCodeComputer computer = new IntCodeComputer();
+    IntCodeComputer computer = new IntCodeComputer(get_int_inputs(","));
 
     public static void main(String[] args) {
         new Day5__SunnyWithAChanceOfAsteroids().print_answers();
@@ -12,12 +12,12 @@ public class Day5__SunnyWithAChanceOfAsteroids implements Day, IntInputs {
 
     @Override
     public int part_one() {
-        return computer.run_program(1, get_int_inputs(","));
+        return (int) computer.run_program(1);
     }
 
     @Override
     public int part_two() {
-        return computer.run_program(5, get_int_inputs(","));
+        return (int) computer.run_program(5);
     }
 
     @Override

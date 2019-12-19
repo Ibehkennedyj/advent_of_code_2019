@@ -4,16 +4,14 @@ import programs.IntCodeComputer;
 
 public class Day2__1202ProgramAlert implements Day, IntInputs {
 
-    IntCodeComputer computer = new IntCodeComputer();
-
-    private int run_program_with_noun_verb(int[] in, int noun, int verb) {
+    private int run_program_with_noun_verb(long[] in, int noun, int verb) {
         in[1] = noun;
         in[2] = verb;
-        return computer.run_program(-1, in);
+        return (int) new IntCodeComputer(in).run_program();
     }
 
     public int part_one() {
-        int[] input = get_int_inputs(",");
+        long[] input = get_int_inputs(",");
 
         return run_program_with_noun_verb(input, 12, 2);
     }

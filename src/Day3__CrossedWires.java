@@ -221,8 +221,7 @@ public class Day3__CrossedWires implements Reader, Day {
         public int getSubLength(Point point) throws PathNotImplementedException {
             int length = 0;
             if (has(point)) {
-                for (int i = 0; i < lines.size(); i++) {
-                    Line line = lines.get(i);
+                for (Line line : lines) {
                     if (!line.has(point))
                         length += line.getLength();
                     else
