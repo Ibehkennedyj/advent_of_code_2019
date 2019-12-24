@@ -35,6 +35,10 @@ public class IntCode {
         return outputs.get(index);
     }
 
+    public long getLastOutput() {
+        return outputs.get(outputs.size() - 1);
+    }
+
     public void run_command(boolean first_output) throws PathNotImplementedException {
         while (index < codes.length) {
             if (codes[index] == 99)
