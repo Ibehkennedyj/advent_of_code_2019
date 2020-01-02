@@ -1,10 +1,10 @@
 import interfaces.Day;
 import interfaces.IntInputs;
-import programs.IntCodeComputer;
+import programs.IntCodeComputer_old;
 
 public class Day5__SunnyWithAChanceOfAsteroids implements Day, IntInputs {
 
-    IntCodeComputer computer = new IntCodeComputer(get_int_inputs(","));
+    IntCodeComputer_old computer = new IntCodeComputer_old(get_int_inputs(","));
 
     public static void main(String[] args) {
         new Day5__SunnyWithAChanceOfAsteroids().print_answers();

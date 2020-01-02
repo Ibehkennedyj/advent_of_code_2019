@@ -2,7 +2,7 @@ import exception.PathNotImplementedException;
 import interfaces.Day;
 import interfaces.IntInputs;
 import programs.IntCode;
-import programs.IntCodeComputer;
+import programs.IntCodeComputer_old;
 
 import java.util.Arrays;
 import java.util.List;
@@ -66,7 +66,7 @@ public class Day7__AmplificationCircuit implements Day, IntInputs {
     }
 
     public int run_program_with_signal_with_throw(long[] input, int[] signal, int thrust_signal) throws PathNotImplementedException {
-        IntCodeComputer comp = new IntCodeComputer(input);
+        IntCodeComputer_old comp = new IntCodeComputer_old(input);
         for (int i : signal) {
             IntCode code = new IntCode(input);
             code.addInputs(i, thrust_signal);

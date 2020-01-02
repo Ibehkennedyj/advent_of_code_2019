@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class IntCodeComputer {
+public class IntCodeComputer_old {
 
     public List<Integer> outputs;
     private List<Integer> inputs;
@@ -12,13 +12,13 @@ public class IntCodeComputer {
     private int input_index;
     private int i;
 
-    public IntCodeComputer(long[] intcode) {
+    public IntCodeComputer_old(long[] intcode) {
         this.intcode = intcode;
         outputs = new ArrayList<>();
         inputs = new ArrayList<>();
     }
 
-    public IntCodeComputer(long[] intcode, List<Integer> inputs) {
+    public IntCodeComputer_old(long[] intcode, List<Integer> inputs) {
         this(intcode);
         this.inputs = inputs;
     }

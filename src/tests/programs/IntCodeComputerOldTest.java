@@ -12,7 +12,7 @@ import java.util.Collection;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @RunWith(Parameterized.class)
-public class IntCodeComputerTest {
+public class IntCodeComputerOldTest {
 
 
     @Parameterized.Parameters
@@ -41,10 +41,10 @@ public class IntCodeComputerTest {
     private String inputs;
     private Integer[] input;
     private int expected;
-    private IntCodeComputer computer;
+    private IntCodeComputer_old computer;
 
 
-    public IntCodeComputerTest(String inputs, Integer[] input, int expected) {
+    public IntCodeComputerOldTest(String inputs, Integer[] input, int expected) {
         this.inputs = inputs;
         this.input = input;
         this.expected = expected;
@@ -52,7 +52,7 @@ public class IntCodeComputerTest {
 
     @Before
     public void setUp() {
-        computer = new IntCodeComputer(((IntInputs) () -> inputs).get_int_inputs(","));
+        computer = new IntCodeComputer_old(((IntInputs) () -> inputs).get_int_inputs(","));
     }
 
     @Test

@@ -1,20 +1,23 @@
+import exception.PathNotImplementedException;
 import interfaces.Day;
 import interfaces.Reader;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import java.util.stream.LongStream;
 
 public class Day22__SlamShuffle implements Day, Reader {
     @Override
     public int part_one() {
         final String[] commands = get_puzzle_input().split("\n");
-        List<Integer> factoryDeck = IntStream.range(0, 10007).boxed().collect(Collectors.toList());
+        long position = 2019;
+        return (int) executeCommands(commands, position, 10007);
+    }
+
+    private long executeCommands(String[] commands, long position, long deckSize) {
         for (String command : commands)
-            factoryDeck = shuffleDeck(factoryDeck, command);
-        return factoryDeck.indexOf(2019);
+            position = shuffleDeck(deckSize, position, command);
+        return position;
     }
 
     public <T> List<T> shuffleDeck(List<T> factoryDeck, String command) {
@@ -27,24 +30,36 @@ public class Day22__SlamShuffle implements Day, Reader {
         return factoryDeck;
     }
 
+    public long shuffleDeck(long deckSize, long position, String command) {
+        if (command.equals("deal into new stack"))
+            position = newStack(deckSize, position);
+        else if (command.contains("cut"))
+            position = cut(deckSize, Long.parseLong(command.split(" ")[1]), position);
+        else if (command.contains("increment"))
+            position = increment(deckSize, Long.parseLong(command.split(" ")[3]), position);
+        return position;
+    }
+
     @Override
     public int part_two() {
         final String[] commands = get_puzzle_input().split("\n");
-        List<Long> factoryDeck = LongStream.range(0, 119315717514047L).boxed().collect(Collectors.toList());
-        List<Long> deck = new ArrayList<>(factoryDeck);
+        List<Long> subSet = List.of(0L, 1L, 2L);
         long resetCount = 0;
+        long deckSize = 119315717514047L;
         do {
             resetCount++;
-            for (String command : commands)
-                deck = shuffleDeck(deck, command);
-        } while (!deck.equals(factoryDeck));
-        long count = 101741582076661L % resetCount;
+            subSet = subSet.stream()
+                    .map(l -> executeCommands(commands, l, deckSize))
+                    .collect(Collectors.toList());
+        } while (!subSet.equals(List.of(0L, 1L, 2L)));
         System.out.println(resetCount);
-        for (int i = 0; i < count; i++) {
-            for (String command : commands)
-                factoryDeck = shuffleDeck(factoryDeck, command);
-        }
-        return factoryDeck.indexOf(2020L);
+//        long count = deckSize % resetCount;
+//        long position = 2019;
+//        for (int i = 0; i < count; i++) {
+//            position = executeCommands(commands, position, deckSize);
+//        }
+//        return (int) position;
+        return -1;
     }
 
     public <T> List<T> newStack(List<T> deck) {
@@ -88,11 +103,10 @@ public class Day22__SlamShuffle implements Day, Reader {
         return newStack;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws PathNotImplementedException {
         Day22__SlamShuffle day22 = new Day22__SlamShuffle();
-//        day22.print_answers();
-        for (int i = 0; i < 10; i++)
-            System.out.println(day22.increment(10, 3, i));
+        day22.print_answers();
+//        System.out.println(day22.part_one());
     }
 
     @Override

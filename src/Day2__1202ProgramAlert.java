@@ -1,13 +1,13 @@
 import interfaces.Day;
 import interfaces.IntInputs;
-import programs.IntCodeComputer;
+import programs.IntCodeComputer_old;
 
 public class Day2__1202ProgramAlert implements Day, IntInputs {
 
     private int run_program_with_noun_verb(long[] in, int noun, int verb) {
         in[1] = noun;
         in[2] = verb;
-        return (int) new IntCodeComputer(in).run_program();
+        return (int) new IntCodeComputer_old(in).run_program();
     }
 
     public int part_one() {
