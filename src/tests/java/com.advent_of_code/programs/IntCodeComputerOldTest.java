@@ -1,8 +1,8 @@
-package programs;
+package com.advent_of_code.programs;
 
-import interfaces.IntInputs;
-import org.junit.Before;
-import org.junit.Test;
+import com.advent_of_code.interfaces.IntInputs;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
@@ -13,7 +13,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @RunWith(Parameterized.class)
 public class IntCodeComputerOldTest {
-
 
     @Parameterized.Parameters
     public static Collection<Object[]> data() {
@@ -43,14 +42,13 @@ public class IntCodeComputerOldTest {
     private int expected;
     private IntCodeComputer_old computer;
 
-
     public IntCodeComputerOldTest(String inputs, Integer[] input, int expected) {
         this.inputs = inputs;
         this.input = input;
         this.expected = expected;
     }
 
-    @Before
+    @BeforeEach
     public void setUp() {
         computer = new IntCodeComputer_old(((IntInputs) () -> inputs).get_int_inputs(","));
     }

@@ -1,6 +1,8 @@
-import exception.PathNotImplementedException;
-import interfaces.Day;
-import interfaces.Reader;
+package com.advent_of_code;
+
+import com.advent_of_code.exception.PathNotImplementedException;
+import com.advent_of_code.interfaces.Day;
+import com.advent_of_code.interfaces.Reader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,12 +55,12 @@ public class Day22__SlamShuffle implements Day, Reader {
                     .collect(Collectors.toList());
         } while (!subSet.equals(List.of(0L, 1L, 2L)));
         System.out.println(resetCount);
-//        long count = deckSize % resetCount;
-//        long position = 2019;
-//        for (int i = 0; i < count; i++) {
-//            position = executeCommands(commands, position, deckSize);
-//        }
-//        return (int) position;
+        //        long count = deckSize % resetCount;
+        //        long position = 2019;
+        //        for (int i = 0; i < count; i++) {
+        //            position = executeCommands(commands, position, deckSize);
+        //        }
+        //        return (int) position;
         return -1;
     }
 
@@ -94,7 +96,6 @@ public class Day22__SlamShuffle implements Day, Reader {
         return newStack;
     }
 
-
     public <T> List<T> increment(List<T> deck, int n) {
         List<T> newStack = new ArrayList<>(deck);
         for (int i = 0; i < deck.size(); i++) {
@@ -106,7 +107,7 @@ public class Day22__SlamShuffle implements Day, Reader {
     public static void main(String[] args) throws PathNotImplementedException {
         Day22__SlamShuffle day22 = new Day22__SlamShuffle();
         day22.print_answers();
-//        System.out.println(day22.part_one());
+        //        System.out.println(day22.part_one());
     }
 
     @Override

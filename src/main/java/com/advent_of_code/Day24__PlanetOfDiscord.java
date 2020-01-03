@@ -1,6 +1,8 @@
-import exception.PathNotImplementedException;
-import interfaces.Day;
-import interfaces.Reader;
+package com.advent_of_code;
+
+import com.advent_of_code.exception.PathNotImplementedException;
+import com.advent_of_code.interfaces.Day;
+import com.advent_of_code.interfaces.Reader;
 
 import java.util.ArrayList;
 import java.util.List;

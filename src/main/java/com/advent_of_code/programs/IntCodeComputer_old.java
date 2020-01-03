@@ -1,4 +1,4 @@
-package programs;
+package com.advent_of_code.programs;
 
 import java.util.ArrayList;
 import java.util.Arrays;

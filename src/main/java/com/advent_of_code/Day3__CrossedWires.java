@@ -1,13 +1,14 @@
-import exception.PathNotImplementedException;
-import interfaces.Day;
-import interfaces.Reader;
+package com.advent_of_code;
+
+import com.advent_of_code.exception.PathNotImplementedException;
+import com.advent_of_code.interfaces.Day;
+import com.advent_of_code.interfaces.Reader;
 
 import java.security.InvalidParameterException;
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class Day3__CrossedWires implements Reader, Day {
-
 
     @Override
     public String get_puzzle_input() {
@@ -129,7 +130,8 @@ public class Day3__CrossedWires implements Reader, Day {
                         list.sort(Comparator.naturalOrder());
                         return y >= list.get(0) && y <= list.get(1);
                     }
-                } else return line.intersects(this);
+                } else
+                    return line.intersects(this);
             }
             return false;
         }
@@ -208,7 +210,8 @@ public class Day3__CrossedWires implements Reader, Day {
                 for (int j = i; j < wire.lines.size(); j++) {
                     final Line line = lines.get(i);
                     final Line line1 = wire.lines.get(j);
-                    if (line.intersects(line1)) points.add(line.getIntersection(line1));
+                    if (line.intersects(line1))
+                        points.add(line.getIntersection(line1));
                 }
             }
             return points;

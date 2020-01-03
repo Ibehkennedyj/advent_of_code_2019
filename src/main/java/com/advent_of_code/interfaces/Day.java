@@ -1,6 +1,6 @@
-package interfaces;
+package com.advent_of_code.interfaces;
 
-import exception.PathNotImplementedException;
+import com.advent_of_code.exception.PathNotImplementedException;
 
 public interface Day {
 

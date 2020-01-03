@@ -1,5 +1,7 @@
-import interfaces.Day;
-import interfaces.Reader;
+package com.advent_of_code;
+
+import com.advent_of_code.interfaces.Day;
+import com.advent_of_code.interfaces.Reader;
 
 public class Day8__SpaceImageFormat implements Day, Reader {
 

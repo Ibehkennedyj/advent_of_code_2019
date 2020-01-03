@@ -1,5 +1,7 @@
-import interfaces.Day;
-import interfaces.IntInputs;
+package com.advent_of_code;
+
+import com.advent_of_code.interfaces.Day;
+import com.advent_of_code.interfaces.IntInputs;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +47,8 @@ public class Day4__SecureContainer implements Day, IntInputs {
                 count = 1;
             }
         }
-        if (count > 1) list.add(count);
+        if (count > 1)
+            list.add(count);
         return list;
     }
 

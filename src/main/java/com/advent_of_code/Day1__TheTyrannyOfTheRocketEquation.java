@@ -1,31 +1,30 @@
-import interfaces.Day;
-import interfaces.IntInputs;
-import org.junit.Test;
+package com.advent_of_code;
 
-import static org.junit.Assert.assertEquals;
+import com.advent_of_code.interfaces.Day;
+import com.advent_of_code.interfaces.IntInputs;
 
 public class Day1__TheTyrannyOfTheRocketEquation implements Day, IntInputs {
 
-    private int fuel_per_mass(int mass) {
+    int fuelPerMass(int mass) {
         return mass / 3 - 2;
     }
 
-    private int fuel_per_module(int module_mass) {
+    int fuelPerModule(int module_mass) {
         int answer = 0;
-        while (fuel_per_mass(module_mass) > 0)
-            answer += module_mass = fuel_per_mass(module_mass);
+        while (fuelPerMass(module_mass) > 0)
+            answer += module_mass = fuelPerMass(module_mass);
         return answer;
     }
 
     public int part_one() {
         return get_int_inputs_stream("\n")
-                .map(this::fuel_per_mass)
+                .map(this::fuelPerMass)
                 .sum();
     }
 
     public int part_two() {
         return get_int_inputs_stream("\n")
-                .map(this::fuel_per_module)
+                .map(this::fuelPerModule)
                 .sum();
     }
 
@@ -135,28 +134,6 @@ public class Day1__TheTyrannyOfTheRocketEquation implements Day, IntInputs {
                 "89856\n" +
                 "75040\n" +
                 "139131";
-    }
-
-    class TestArea {
-
-        @Test
-        public void test_fuel_per_mass() {
-            assertEquals(2, fuel_per_mass(12));
-            assertEquals(2, fuel_per_mass(14));
-            assertEquals(3, fuel_per_mass(15));
-            assertEquals(654, fuel_per_mass(1969));
-            assertEquals(33583, fuel_per_mass(100756));
-        }
-
-        @Test
-        public void test_fuel_per_module() {
-            assertEquals(2, fuel_per_module(12));
-            assertEquals(2, fuel_per_module(14));
-            assertEquals(3, fuel_per_module(15));
-            assertEquals(966, fuel_per_module(1969));
-            assertEquals(50346, fuel_per_module(100756));
-        }
-
     }
 
 }

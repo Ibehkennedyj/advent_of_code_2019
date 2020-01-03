@@ -1,6 +1,8 @@
-import interfaces.Day;
-import interfaces.IntInputs;
-import programs.IntCodeComputer_old;
+package com.advent_of_code;
+
+import com.advent_of_code.interfaces.Day;
+import com.advent_of_code.interfaces.IntInputs;
+import com.advent_of_code.programs.IntCodeComputer_old;
 
 public class Day5__SunnyWithAChanceOfAsteroids implements Day, IntInputs {
 

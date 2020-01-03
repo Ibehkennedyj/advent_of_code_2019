@@ -1,4 +1,4 @@
-package programs;
+package com.advent_of_code.programs;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

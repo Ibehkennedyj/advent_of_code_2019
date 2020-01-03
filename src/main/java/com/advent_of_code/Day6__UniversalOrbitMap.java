@@ -1,14 +1,12 @@
-import interfaces.Day;
-import interfaces.Reader;
+package com.advent_of_code;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import com.advent_of_code.interfaces.Day;
+import com.advent_of_code.interfaces.Reader;
+
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Day6__UniversalOrbitMap implements Day, Reader {
-
 
     @Override
     public int part_one() {

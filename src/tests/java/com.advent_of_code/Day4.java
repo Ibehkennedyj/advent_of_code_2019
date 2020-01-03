@@ -1,3 +1,5 @@
+package com.advent_of_code;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

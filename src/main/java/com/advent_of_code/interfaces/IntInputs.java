@@ -1,4 +1,4 @@
-package interfaces;
+package com.advent_of_code.interfaces;
 
 import java.util.Arrays;
 import java.util.stream.IntStream;

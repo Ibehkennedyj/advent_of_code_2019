@@ -1,8 +1,10 @@
-import exception.PathNotImplementedException;
-import interfaces.Day;
-import interfaces.IntInputs;
-import programs.IntCode;
-import programs.IntCodeComputer_old;
+package com.advent_of_code;
+
+import com.advent_of_code.exception.PathNotImplementedException;
+import com.advent_of_code.interfaces.Day;
+import com.advent_of_code.interfaces.IntInputs;
+import com.advent_of_code.programs.IntCode;
+import com.advent_of_code.programs.IntCodeComputer_old;
 
 import java.util.Arrays;
 import java.util.List;
@@ -11,7 +13,6 @@ import java.util.stream.IntStream;
 
 public class Day7__AmplificationCircuit implements Day, IntInputs {
 
-
     @Override
     public int part_one() {
         return possibleCombos(List.of("1", "2", "3", "4", "0"))
@@ -19,7 +20,7 @@ public class Day7__AmplificationCircuit implements Day, IntInputs {
                 .mapToInt(s -> run_program_with_signal(get_int_inputs(","), s, 0))
                 .max()
                 .orElse(-1);
-//        return -1;
+        //        return -1;
     }
 
     @Override
@@ -70,7 +71,7 @@ public class Day7__AmplificationCircuit implements Day, IntInputs {
         for (int i : signal) {
             IntCode code = new IntCode(input);
             code.addInputs(i, thrust_signal);
-            code.run_command(true);
+            code.runCommand(true);
             thrust_signal = (int) code.getOutput(0);
         }
         return thrust_signal;

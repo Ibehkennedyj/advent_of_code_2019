@@ -1,4 +1,6 @@
-package programs;
+package com.advent_of_code.programs;
+
+import com.advent_of_code.util.Number;
 
 public class IntcodeComputer {
 
@@ -12,28 +14,28 @@ public class IntcodeComputer {
     }
 
     int[] opcode1(int[] initialState) {
-        int pos1 = initialState[pointer + 1];
-        int pos2 = initialState[pointer + 2];
-        int pos3 = initialState[pointer + 3];
+        int pos1 = initialState[pointer + Number.ONE];
+        int pos2 = initialState[pointer + Number.TWO];
+        int pos3 = initialState[pointer + Number.THREE];
 
         int value1 = initialState[pos1];
         int value2 = initialState[pos2];
 
         initialState[pos3] = value1 + value2;
-        pointer += 3;
+        pointer += Number.THREE;
         return initialState;
     }
 
     int[] opcode2(int[] initialState) {
-        int pos1 = initialState[pointer + 1];
-        int pos2 = initialState[pointer + 2];
-        int pos3 = initialState[pointer + 3];
+        int pos1 = initialState[pointer + Number.ONE];
+        int pos2 = initialState[pointer + Number.TWO];
+        int pos3 = initialState[pointer + Number.THREE];
 
         int value1 = initialState[pos1];
         int value2 = initialState[pos2];
 
         initialState[pos3] = value1 * value2;
-        pointer += 3;
+        pointer += Number.THREE;
         return initialState;
     }
 }
