@@ -16,14 +16,14 @@ public class Day1__TheTyrannyOfTheRocketEquation implements Day, IntInputs {
         return answer;
     }
 
-    public int part_one() {
-        return get_int_inputs_stream("\n")
+    public int partOne() {
+        return getIntInputsStream("\n")
                 .map(this::fuelPerMass)
                 .sum();
     }
 
-    public int part_two() {
-        return get_int_inputs_stream("\n")
+    public int partTwo() {
+        return getIntInputsStream("\n")
                 .map(this::fuelPerModule)
                 .sum();
     }
@@ -33,7 +33,7 @@ public class Day1__TheTyrannyOfTheRocketEquation implements Day, IntInputs {
     }
 
     @Override
-    public String get_puzzle_input() {
+    public String getPuzzleInput() {
         return "147308\n" +
                 "51605\n" +
                 "71317\n" +

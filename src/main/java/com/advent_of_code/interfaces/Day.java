@@ -1,18 +1,18 @@
 package com.advent_of_code.interfaces;
 
-import com.advent_of_code.exception.PathNotImplementedException;
+import com.advent_of_code.exception.PartNotImplementedException;
 
 public interface Day {
 
-    int part_one() throws PathNotImplementedException;
+    int partOne() throws PartNotImplementedException;
 
-    int part_two();
+    int partTwo() throws PartNotImplementedException;
 
     default void print_answers() {
         try {
-            System.out.println("Part One: " + part_one());
-            System.out.println("Part Two: " + part_two());
-        } catch (PathNotImplementedException e) {
+            System.out.println("Part One: " + partOne());
+            System.out.println("Part Two: " + partTwo());
+        } catch (PartNotImplementedException e) {
             e.printStackTrace();
         }
     }

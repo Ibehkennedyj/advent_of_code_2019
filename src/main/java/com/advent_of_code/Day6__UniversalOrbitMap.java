@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 public class Day6__UniversalOrbitMap implements Day, Reader {
 
     @Override
-    public int part_one() {
+    public int partOne() {
         Map<String, String> orbitMap = getOrbitMapping();
         return orbitMap.keySet()
                 .stream()
@@ -34,13 +34,13 @@ public class Day6__UniversalOrbitMap implements Day, Reader {
     }
 
     private Map<String, String> getOrbitMapping() {
-        return Arrays.stream(get_puzzle_input().split("\n"))
+        return Arrays.stream(getPuzzleInput().split("\n"))
                 .map(s -> s.split("\\)"))
                 .collect(Collectors.toMap(mapping -> mapping[1], mapping -> mapping[0], (a, b) -> b));
     }
 
     @Override
-    public int part_two() {
+    public int partTwo() {
         final List<String> sanPath = getOrbitsPath("SAN");
         final List<String> youPath = getOrbitsPath("YOU");
         int l = sanPath.size() + youPath.size();
@@ -53,7 +53,7 @@ public class Day6__UniversalOrbitMap implements Day, Reader {
     }
 
     @Override
-    public String get_puzzle_input() {
+    public String getPuzzleInput() {
         return "HL2)HP5\n" +
                 "PD5)SVL\n" +
                 "GGS)YTS\n" +

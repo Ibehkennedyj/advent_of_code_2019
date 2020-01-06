@@ -9,8 +9,8 @@ import java.util.stream.LongStream;
 
 public class Day4__SecureContainer implements Day, IntInputs {
     @Override
-    public int part_one() {
-        final long[] range = get_int_inputs("-");
+    public int partOne() {
+        final long[] range = getIntInputs("-");
         return (int) LongStream.rangeClosed(range[0], range[1])
                 .filter(this::does_not_decrease)
                 .filter(this::has_same_adjacent_number)
@@ -53,8 +53,8 @@ public class Day4__SecureContainer implements Day, IntInputs {
     }
 
     @Override
-    public int part_two() {
-        final long[] range = get_int_inputs("-");
+    public int partTwo() {
+        final long[] range = getIntInputs("-");
         return (int) LongStream.rangeClosed(range[0], range[1])
                 .filter(this::does_not_decrease)
                 .filter(this::has_isolated_pair)
@@ -62,7 +62,7 @@ public class Day4__SecureContainer implements Day, IntInputs {
     }
 
     @Override
-    public String get_puzzle_input() {
+    public String getPuzzleInput() {
         return "271973-785961";
     }
 

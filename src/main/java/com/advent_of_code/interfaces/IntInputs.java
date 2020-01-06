@@ -5,14 +5,14 @@ import java.util.stream.IntStream;
 
 public interface IntInputs extends Reader {
 
-    default IntStream get_int_inputs_stream(String delimiter) {
-        return Arrays.stream(get_puzzle_input().split(delimiter))
+    default IntStream getIntInputsStream(String delimiter) {
+        return Arrays.stream(getPuzzleInput().split(delimiter))
                 .map(String::trim)
                 .mapToInt(Integer::parseInt);
     }
 
-    default long[] get_int_inputs(String delimiter) {
-        return Arrays.stream(get_puzzle_input().split(delimiter))
+    default long[] getIntInputs(String delimiter) {
+        return Arrays.stream(getPuzzleInput().split(delimiter))
                 .map(String::trim)
                 .mapToLong(Long::parseLong)
                 .toArray();

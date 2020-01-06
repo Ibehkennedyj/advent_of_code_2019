@@ -50,7 +50,7 @@ public class IntCodeComputerOldTest {
 
     @BeforeEach
     public void setUp() {
-        computer = new IntCodeComputer_old(((IntInputs) () -> inputs).get_int_inputs(","));
+        computer = new IntCodeComputer_old(((IntInputs) () -> inputs).getIntInputs(","));
     }
 
     @Test

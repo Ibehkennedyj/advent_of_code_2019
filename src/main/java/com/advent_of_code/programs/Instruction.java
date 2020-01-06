@@ -14,39 +14,62 @@ public class Instruction {
     static Instruction from(int start, int[] sub) {
         Instruction instruction = new Instruction();
 
-        if (ONE > sub.length || FOUR < sub.length)
-            throw new MalformedParametersException();
+        validateParameters(sub);
 
         int command = sub[ZERO];
-        int opcode = command % ONE_HUNDRED;
-        instruction.opcode = opcode;
+        instruction.opcode = extractOpcode(command);
 
-        int firstMode = (command / ONE_HUNDRED) % TEN;
-        int secondMode = (command / ONE_THOUSAND) % TEN;
-        int thirdMode = (command / TEN_THOUSAND) % TEN;
-
-        switch (opcode) {
-            case ONE, TWO, SEVEN, EIGHT:
-                instruction.thirdPosition = enumerateThirdPositionInstruction(start, sub, thirdMode);
-            case FIVE, SIX:
-                instruction.secondPosition = enumerateSecondPositionInstruction(start, sub, secondMode);
-            case THREE, FOUR:
-                instruction.firstPosition = enumerateFirstPositionInstruction(start, sub, firstMode);
+        switch (instruction.opcode) {
+            case ONE, TWO, SEVEN, EIGHT -> instruction.thirdPosition = resolveThirdPosition(start, sub, command);
+            case FIVE, SIX -> instruction.secondPosition = resolveSecondPosition(start, sub, command);
+            case THREE, FOUR -> instruction.firstPosition = resolveFirstPosition(start, sub, command);
+            default -> doNothing();
         }
 
         return instruction;
     }
 
-    private static int enumerateFirstPositionInstruction(int start, int[] sub, int firstMode) {
+    private static void doNothing() {
+        //TODO: Create a behaviour;
+    }
+
+    static int extractOpcode(int command) {
+        return command % ONE_HUNDRED;
+    }
+
+    static void validateParameters(int[] sub) {
+        if (ONE > sub.length || FOUR < sub.length)
+            throw new MalformedParametersException();
+    }
+
+    private static int resolveFirstPosition(int start, int[] sub, int command) {
+        int firstMode = calculateFirstMode(command);
+
         return ZERO == firstMode ? sub[ONE] : start + ONE;
     }
 
-    private static int enumerateSecondPositionInstruction(int start, int[] sub, int secondMode) {
+    private static int resolveSecondPosition(int start, int[] sub, int command) {
+        int secondMode = calculateSecondMode(command);
+
         return ZERO == secondMode ? sub[TWO] : start + TWO;
     }
 
-    private static int enumerateThirdPositionInstruction(int start, int[] sub, int thirdMode) {
+    private static int resolveThirdPosition(int start, int[] sub, int command) {
+        int thirdMode = calculateThirdMode(command);
+
         return ZERO == thirdMode ? sub[THREE] : start + THREE;
+    }
+
+    static int calculateFirstMode(int command) {
+        return (command / ONE_HUNDRED) % TEN;
+    }
+
+    static int calculateSecondMode(int command) {
+        return (command / ONE_THOUSAND) % TEN;
+    }
+
+    static int calculateThirdMode(int command) {
+        return (command / TEN_THOUSAND) % TEN;
     }
 
     public int getOpcode() {
@@ -61,22 +84,8 @@ public class Instruction {
         return this.secondPosition;
     }
 
-    public void executeOn(long[] codes) {
-        if (ONE == opcode)
-            codes[thirdPosition] = codes[firstPosition] + codes[secondPosition];
-        else if (TWO == opcode)
-            codes[thirdPosition] = codes[firstPosition] * codes[secondPosition];
-        else if (SEVEN == opcode)
-            codes[thirdPosition] = codes[firstPosition] < codes[secondPosition] ? ONE : ZERO;
-        else if (EIGHT == opcode)
-            codes[thirdPosition] = codes[firstPosition] == codes[secondPosition] ? ONE : ZERO;
+    public int getThirdPosition() {
+        return this.thirdPosition;
     }
 
-    public void executeInputOn(long[] codes, int input) {
-        codes[firstPosition] = input;
-    }
-
-    public long executeOutputOn(long[] codes) {
-        return codes[firstPosition];
-    }
 }

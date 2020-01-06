@@ -1,6 +1,6 @@
 package com.advent_of_code.programs;
 
-import com.advent_of_code.exception.PathNotImplementedException;
+import com.advent_of_code.exception.PartNotImplementedException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -84,7 +84,7 @@ class IntCodeTest {
     }
 
     @Test
-    void test_5_8() throws PathNotImplementedException {
+    void test_5_8() throws PartNotImplementedException {
         IntCode comp = new IntCode(1105, 9, 4, 99, 104, 1000, 99);
         comp.runCommand(false);
         assertEquals(1000, comp.getOutput(0));

@@ -1,33 +1,38 @@
 package com.advent_of_code;
 
-import com.advent_of_code.exception.PathNotImplementedException;
 import com.advent_of_code.interfaces.Day;
 import com.advent_of_code.interfaces.Reader;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
+
+import static java.lang.String.valueOf;
 
 public class Day24__PlanetOfDiscord implements Day, Reader {
 
+    private static final Logger logger = Logger.getLogger(Day24__PlanetOfDiscord.class.getName());
+
     @Override
-    public int part_one() throws PathNotImplementedException {
+    public int partOne() {
         int[][] grid = readGrid();
         List<Long> biodiversityRatings = new ArrayList<>();
         while (!biodiversityRatings.contains(getBiodiversityRating(grid))) {
             biodiversityRatings.add(getBiodiversityRating(grid));
             grid = updateGrid(grid);
         }
-        System.out.println(getBiodiversityRating(grid));
+
+        logger.info("BioDiversity Rating -> %d" + getBiodiversityRating(grid));
         return (int) getBiodiversityRating(grid);
     }
 
     @Override
-    public int part_two() {
+    public int partTwo() {
         return 0;
     }
 
-    public int[][] readGrid() throws PathNotImplementedException {
-        String[] lines = get_puzzle_input().split("\n");
+    public int[][] readGrid() {
+        String[] lines = getPuzzleInput().split("\n");
         int[][] grid = new int[5][5];
         for (int i = 0; i < 5; i++) {
             String line = lines[i];
@@ -35,7 +40,7 @@ public class Day24__PlanetOfDiscord implements Day, Reader {
                 grid[i][j] = switch (line.charAt(j)) {
                     case '.' -> 0;
                     case '#' -> 1;
-                    default -> throw new PathNotImplementedException();
+                    default -> throw new UnsupportedOperationException();
                 };
             }
         }
@@ -71,14 +76,14 @@ public class Day24__PlanetOfDiscord implements Day, Reader {
         return biodiversityRating;
     }
 
-    public static void main(String[] args) throws PathNotImplementedException {
+    public static void main(String[] args) {
         Day24__PlanetOfDiscord day24 = new Day24__PlanetOfDiscord();
-        System.out.println(day24.getBiodiversityRating(day24.readGrid()));
+        logger.info(() -> valueOf(day24.getBiodiversityRating(day24.readGrid())));
         day24.print_answers();
     }
 
     @Override
-    public String get_puzzle_input() {
+    public String getPuzzleInput() {
         return "..###\n" +
                 ".####\n" +
                 "...#.\n" +

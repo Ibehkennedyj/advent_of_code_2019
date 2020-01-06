@@ -1,6 +1,5 @@
 package com.advent_of_code;
 
-import com.advent_of_code.exception.PathNotImplementedException;
 import com.advent_of_code.interfaces.Day;
 import com.advent_of_code.interfaces.Reader;
 
@@ -10,8 +9,8 @@ import java.util.stream.Collectors;
 
 public class Day22__SlamShuffle implements Day, Reader {
     @Override
-    public int part_one() {
-        final String[] commands = get_puzzle_input().split("\n");
+    public int partOne() {
+        final String[] commands = getPuzzleInput().split("\n");
         long position = 2019;
         return (int) executeCommands(commands, position, 10007);
     }
@@ -43,8 +42,8 @@ public class Day22__SlamShuffle implements Day, Reader {
     }
 
     @Override
-    public int part_two() {
-        final String[] commands = get_puzzle_input().split("\n");
+    public int partTwo() {
+        final String[] commands = getPuzzleInput().split("\n");
         List<Long> subSet = List.of(0L, 1L, 2L);
         long resetCount = 0;
         long deckSize = 119315717514047L;
@@ -104,14 +103,14 @@ public class Day22__SlamShuffle implements Day, Reader {
         return newStack;
     }
 
-    public static void main(String[] args) throws PathNotImplementedException {
+    public static void main(String[] args) {
         Day22__SlamShuffle day22 = new Day22__SlamShuffle();
         day22.print_answers();
         //        System.out.println(day22.part_one());
     }
 
     @Override
-    public String get_puzzle_input() {
+    public String getPuzzleInput() {
         return "deal with increment 61\n" +
                 "cut 7724\n" +
                 "deal into new stack\n" +

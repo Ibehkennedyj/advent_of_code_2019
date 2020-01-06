@@ -1,7 +1,5 @@
 package com.advent_of_code.programs;
 
-import com.advent_of_code.exception.PathNotImplementedException;
-
 import java.util.*;
 import java.util.stream.IntStream;
 
@@ -13,6 +11,7 @@ public class IntCode {
     private int index;
     private List<Long> outputs;
     private List<Integer> inputs;
+    private Instruction instruction;
 
     public IntCode(long... codes) {
         this.codes = codes;
@@ -33,25 +32,37 @@ public class IntCode {
         return outputs.get(index);
     }
 
-    public void runCommand(boolean firstOutput) throws PathNotImplementedException {
-        while (index < codes.length) {
+    public void runCommand(boolean firstOutput) {
+        while (isValidIndex() && isProgramUnfinished() && isNotHaltInstruction(firstOutput)) {
 
-            if (NINETY_NINE == codes[index])
-                return;
+            instruction = Instruction.from(index, sub(codes, index));
 
-            Instruction instruction = Instruction.from(index, sub(codes, index));
+            execute();
 
-            execute(instruction);
-
-            updateIndex(instruction);
-
-            if (firstOutput && FOUR == instruction.getOpcode())
-                return;
+            index = resolveIndex();
         }
     }
 
-    private void updateIndex(Instruction instruction) throws PathNotImplementedException {
-        index = switch (instruction.getOpcode()) {
+    private boolean isNotHaltInstruction(boolean firstOutput) {
+        return instruction == null || !(firstOutput && FOUR == instruction.getOpcode());
+    }
+
+    private boolean isValidIndex() {
+        return index < codes.length;
+    }
+
+    private boolean isProgramUnfinished() {
+        return NINETY_NINE != codes[index];
+    }
+
+    private int[] sub(long[] codes, int index) {
+        return IntStream.range(index, Math.min(index + FOUR, codes.length))
+                .map(s -> (int) codes[s])
+                .toArray();
+    }
+
+    private int resolveIndex() {
+        return switch (instruction.getOpcode()) {
             case ONE, TWO, SEVEN, EIGHT -> index + FOUR;
 
             case THREE, FOUR -> index + TWO;
@@ -60,24 +71,43 @@ public class IntCode {
 
             case SIX -> ZERO == codes[instruction.getFirstPosition()] ? (int) codes[instruction.getSecondPosition()] : index + THREE;
 
-            default -> throw new PathNotImplementedException();
+            default -> throw new UnsupportedOperationException();
         };
     }
 
-    private void execute(Instruction instruction) {
+    private void execute() {
         switch (instruction.getOpcode()) {
-            case ONE, TWO, SEVEN, EIGHT -> instruction.executeOn(codes);
+            case ONE, TWO, SEVEN, EIGHT -> codes[instruction.getThirdPosition()] = enumerateState();
 
-            case THREE -> instruction.executeInputOn(codes, inputs.remove(ZERO));
+            case THREE -> codes[instruction.getFirstPosition()] = inputs.remove(ZERO);
 
-            case FOUR -> outputs.add(instruction.executeOutputOn(codes));
+            case FOUR -> outputs.add(extractOutputFromCodes());
+
+            default -> doNothing();
         }
     }
 
-    private int[] sub(long[] codes, int index) {
-        return IntStream.range(index, Math.min(index + FOUR, codes.length))
-                .map(s -> (int) codes[s])
-                .toArray();
+    private long enumerateState() {
+
+        int instructionFirstPosition = instruction.getFirstPosition();
+        int instructionSecondPosition = instruction.getSecondPosition();
+        int instructionThirdPosition = instruction.getThirdPosition();
+
+        return switch (instruction.getOpcode()) {
+            case ONE -> codes[instructionFirstPosition] + codes[instructionSecondPosition];
+            case TWO -> codes[instructionFirstPosition] * codes[instructionSecondPosition];
+            case SEVEN -> codes[instructionFirstPosition] < codes[instructionSecondPosition] ? ONE : ZERO;
+            case EIGHT -> codes[instructionFirstPosition] == codes[instructionSecondPosition] ? ONE : ZERO;
+            default -> codes[instructionThirdPosition];
+        };
+    }
+
+    private long extractOutputFromCodes() {
+        return codes[instruction.getFirstPosition()];
+    }
+
+    private void doNothing() {
+        //TODO: Create a behaviour;
     }
 
 }
